@@ -222,6 +222,9 @@ defmodule Mix.Tasks.Compile.ElixirMake do
           with {:ok, archived_data} <- Artefact.download(url) do
             File.mkdir_p(Path.dirname(archived_fullpath))
             File.write(archived_fullpath, archived_data)
+          else
+            error ->
+              Mix.shell().warning("Download failed: #{inspect(error)}")
           end
         end
 
